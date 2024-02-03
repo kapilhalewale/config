@@ -6,7 +6,7 @@ spring:
   application:
     name: "apigateway-service"
   config:
-    import: "configserver:http://localhost:8071/"
+    import: "optional:configserver:http://localhost:8071/"
   cloud:
     gateway:
       discovery:
