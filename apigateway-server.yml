@@ -1,11 +1,18 @@
 server:
   port: 8079
 
+#Database configuration
 spring:
   application:
     name: "apigateway-service"
   config:
-    import: "optional:configserver:http://localhost:8071/"
+    import: "configserver:http://localhost:8071/"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
 
 # To fetch updated property values as an when from cloud config
 management:
@@ -20,19 +27,25 @@ management:
     env:
       enabled: true
 
-
 eureka:
   instance:
     preferIpAddress: true
+  hostname: "localhost"
   client:
-    fetchRegistry: true
     registerWithEureka: true
-    serviceUrl:
-      defaultZone: http://localhost:8070/eureka/
+    fetchRegistry: true
+    service-url:
+      defaultZone: "http://localhost:8070/eureka/"
 
 
 info:
   app:
     name: "API Gateway Service"
     description: ""
-    version: "2.0.0"
+    version: "1.0.0"
+
+logging:
+  level:
+    com:
+      kp:
+        apigatewayserver: DEBUG
